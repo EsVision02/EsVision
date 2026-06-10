@@ -153,10 +153,19 @@
       white-space: nowrap;
     }
 
-    /* SECTION SHARED */
-    .section-head { margin-bottom: 3.5rem; text-align: center; }
-    .section-head h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.75rem; letter-spacing: -0.02em; }
-    .section-head p { color: var(--text-muted); font-size: 1.05rem; max-width: 50ch; margin: 0 auto; }
+    /* SECTION TITLES UNIFICATION */
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 65ch;
+      margin-bottom: 2rem;
+    }
 
     /* ── PORTFOLIO BENTO GRID ── */
     #work { padding: 100px 0; background: var(--surface-low); }
@@ -199,13 +208,26 @@
       object-fit: cover; display: block;
       transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    
-    /* CADRAGE SPÉCIFIQUE CHAMBRE KC (Dézoomer et tout afficher) */
-    .p-item-8 { background: #070709; } 
-    .p-item-8 img { object-fit: contain; padding: 12px; }
 
-    .p-item:hover video,
-    .p-item:hover img { transform: scale(1.05); }
+    /* --- ANIMATION PANORAMIQUE CHAMBRE KC --- */
+    .p-item-8 img {
+      width: auto; 
+      height: 100%;
+      max-width: none;
+      animation: panoramic-scan 20s linear infinite alternate;
+    }
+
+    @keyframes panoramic-scan {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-30%); } 
+    }
+
+    .p-item-8:hover img {
+      animation-play-state: paused;
+      transform: scale(1.02) translateX(-15%);
+    }
+
+    .p-item:hover video { transform: scale(1.05); }
 
     .p-overlay {
       position: absolute; inset: 0;
@@ -213,6 +235,7 @@
       padding: 1.75rem;
       display: flex; flex-direction: column; justify-content: flex-end;
       opacity: 0; transition: opacity 0.4s ease;
+      z-index: 2;
     }
     .p-item:hover .p-overlay { opacity: 1; }
 
@@ -267,26 +290,21 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .ticker { padding: 20px 1rem; }
-      .ticker-content { gap: 1.5rem 2rem; }
       .portfolio-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(8, 380px);
+        grid-template-rows: auto;
         gap: 16px;
       }
       .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 { 
         grid-column: span 1 !important; 
-        grid-row: auto !important; 
+        height: 380px;
       }
+      .p-item-8 img { animation: none; width: 100%; object-fit: cover; }
       .bento-card, .card-wide { grid-column: span 12; }
       .nav-links { display: none; }
       .nav-right { gap: 1rem; }
       .process-step { gap: 1.5rem; }
       .step-num { font-size: 2.5rem; width: 50px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; }
     }
   </style>
 </head>
@@ -527,7 +545,7 @@
         hero_btn_primary: 'Lancer un projet <i data-lucide="arrow-right" size="16"></i>',
         hero_btn_secondary: "Voir nos réalisations",
         tick_1: "Modélisation Produit", tick_2: "Animation Publicitaire 3D", tick_3: "Vidéos IA Immersives", tick_4: "DTC & Marques E-com", tick_5: "Rendus Studio 4K",
-        work_badge: "Réalisations", work_title: "Des images conçues pour convertir.", work_desc: "Rendus studio, animations publicitaires et simulations physiques de pointe. Optimisés pour vos fiches produits, landing pages et campagnes Ads.",
+        work_badge: "Réalisations", work_title: "The visuals that sell.", work_desc: "Product renders, animations, and premium 3D simulations — built to perform on ads, landing pages, and social media.",
         p1_tag: "Simulation Organique", p1_title: "Café — Éclatement dynamique de grains torréfiés",
         p2_tag: "Rendu Technique / Macro", p2_title: "Clavier — Vue éclatée de l'anatomie mécanique",
         p3_tag: "Cosmétique Premium", p3_title: "Too Faced — Jeu de lumière sur poudrier blush doré",
@@ -540,7 +558,7 @@
         srv1_title: "Packshots & Rendus 3D", srv1_desc: "Des images produit d'une netteté absolue sous tous les angles. Idéal pour sublimer vos boutiques Shopify, Amazon et vos packagings imprimés.",
         srv2_title: "Vidéos & Animations Publicitaires", srv2_desc: "Vues éclatées, simulations fluides et mouvements caméra audacieux. Nous mettons en scène les forces de votre produit pour captiver instantanément l'acheteur.",
         prc_badge: "Notre Approche", prc_title: "Zéro friction. Un rendu d'élite.",
-        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identité de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
+        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identity de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
         step2_title: "Modélisation Haute Précision", step2_desc: "Réplication numérique de vos produits au micromètre près. Nous sculptons les textures, matières et éclairages pour un réalisme saisissant.",
         step3_title: "Calcul 4K & Livraison Clés en Main", step3_desc: "Vos rendus sont calculés dans la plus haute résolution existante, prêts à être déployés sur vos canaux d'acquisition et de conversion.",
         cta_title: "Prêt à surclasser la concurrence ?", cta_desc: "Donnez à vos tunnels de vente la puissance visuelle des plus grandes marques mondiales.",
