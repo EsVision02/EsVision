@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>EsVision | 3D Visuals for Ecommerce Brands</title>
+  <title>EsVision | Visuels 3D pour Marques E-commerce</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Inter:wght=300;400;500;600&display=swap" rel="stylesheet" />
@@ -40,7 +40,7 @@
     .accent-text { color: var(--accent); }
     .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid var(--border); }
 
-    /* ── ANIMATION FLUIDE D'APPARITION (REVEAL) ── */
+    /* REVEAL SYSTEM */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -88,7 +88,7 @@
     .btn-secondary { color: var(--text-main); border: 1px solid var(--border-bright); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* HERO PLEIN ÉCRAN */
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -121,7 +121,7 @@
     }
     .hero-btns { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
 
-    /* ── BANDEROLE CENTRÉE ── */
+    /* TICKER */
     .ticker {
       padding: 24px 1.5rem;
       border-top: 1px solid var(--border);
@@ -131,12 +131,7 @@
       background: var(--bg);
     }
     .ticker-content { 
-      display: flex; 
-      gap: 3rem; 
-      align-items: center; 
-      justify-content: center; 
-      flex-wrap: wrap; 
-      opacity: 0.4; 
+      display: flex; gap: 3rem; align-items: center; justify-content: center; flex-wrap: wrap; opacity: 0.4; 
     }
     .ticker-item { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
 
@@ -162,28 +157,47 @@
     .p-item-7 { grid-column: 5 / 9; grid-row: 3; }
     .p-item-8 { grid-column: 9 / 13; grid-row: 3; }
 
-    .p-item { position: relative; overflow: hidden; background: var(--surface-high); border-radius: 16px; border: 1px solid var(--border); cursor: pointer; transition: all 0.4s ease; }
-    .p-item:hover { border-color: rgba(255,46,77,0.4); transform: translateY(-5px); }
-    .p-item video, .p-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
-    .p-item:hover video, .p-item:hover img { transform: scale(1.05); }
-
-    /* SPÉCIFIQUE CHAMBRE KC : Déplacement fluide de gauche à droite au survol */
-    .p-item-8 img {
-      width: 150%; /* L'image s'agrandit horizontalement pour permettre le déplacement */
-      max-width: none;
-      object-position: left center; /* Position initiale calée à gauche */
-      transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1); /* Transition ultra douce */
+    .p-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface-high);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.4s ease, transform 0.4s ease;
     }
-    .p-item-8:hover img {
-      transform: translateX(-33.33%); /* Décale l'image vers la gauche pour révéler la droite */
+    .p-item:hover { border-color: rgba(255,46,77,0.4); transform: translateY(-4px); }
+    
+    .p-item video, .p-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      will-change: transform;
+    }
+    
+    /* Zoom très léger et doux sur les vidéos au survol */
+    .p-item:hover video { transform: scale(1.03); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+
+    /* LES IMAGES GLISSENT EN 2D (SANS EFFET 3D PLASTIQUE) */
+    .p-item.interactive-mesh img {
+        width: 106%;  /* 6% de rab pour permettre le mouvement sans laisser de blanc */
+        height: 106%;
+        top: -3%;     /* Centre l'image de base */
+        left: -3%;
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .p-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, transparent 50%);
       padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end;
       opacity: 0; transition: opacity 0.4s ease;
       z-index: 2;
+      pointer-events: none;
     }
     .p-item:hover .p-overlay { opacity: 1; }
     .p-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
@@ -211,35 +225,21 @@
     /* FOOTER */
     footer { padding: 50px 0; border-top: 1px solid var(--border); }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
-    
-    /* Style pour les liens du footer (Même couleur gris/blanc atténué que le copyright) */
-    .footer-links display: flex; gap: 1.5rem; }
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.3s ease;
-    }
-    .footer-links a:hover {
-      color: var(--text-main); /* Devient blanc brillant au survol */
-    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--text-main); }
 
-    /* MOBILE OPTIMIZATIONS */
+    /* MOBILE */
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .hero { min-height: 100vh; padding: 0 1rem; }
       .hero h1 { font-size: 2.8rem; }
       .ticker-content { gap: 1.5rem; }
-      
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; gap: 12px; }
       .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 { grid-column: span 1 !important; height: 240px; }
       .p-overlay { opacity: 1; padding: 1rem; }
       .p-title { font-size: 0.9rem; }
-      
-      /* Reset pour mobile sur la chambre KC afin d'éviter les bugs de débordement */
-      .p-item-8 img { width: 100%; }
-      .p-item-8:hover img { transform: none; }
-
+      .p-item.interactive-mesh:hover img { transform: none !important; }
       .bento-card, .card-wide { grid-column: span 12; padding: 2rem; }
       .btn { width: 100%; justify-content: center; }
       .hero-btns { flex-direction: column; width: 100%; }
@@ -251,10 +251,7 @@
 
   <nav>
     <div class="container">
-      <a href="#" class="logo">
-        <div class="logo-dot"></div>
-        ES<span class="accent-text">VISION</span>
-      </a>
+      <a href="#" class="logo"><div class="logo-dot"></div>ES<span class="accent-text">VISION</span></a>
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#work" data-t="nav_work">Work</a></li>
@@ -335,21 +332,24 @@
             <div class="p-title" data-t="p5_title">Daktarin — Cinematic Product Reveal</div>
           </div>
         </div>
-        <div class="p-item p-item-6 reveal">
+        
+        <div class="p-item p-item-6 interactive-mesh reveal">
           <img src="./assets/mne.png" alt="Mné Biotech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p6_tag">Biotech & Pharma</div>
             <div class="p-title" data-t="p6_title">Mné — Premium Smart Capsule</div>
           </div>
         </div>
-        <div class="p-item p-item-7 reveal">
+        
+        <div class="p-item p-item-7 interactive-mesh reveal">
           <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
             <div class="p-title" data-t="p7_title">M4 Mac — Minimalist Studio Render</div>
           </div>
         </div>
-        <div class="p-item p-item-8 reveal">
+        
+        <div class="p-item p-item-8 interactive-mesh reveal">
           <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
           <div class="p-overlay">
             <div class="p-tag" data-t="p8_tag">3D Environment</div>
@@ -431,27 +431,49 @@
   </footer>
 
   <script>
+    // ── REVEAL SYSTEM ──
     function revealSections() {
       const reveals = document.querySelectorAll(".reveal");
       for (let i = 0; i < reveals.length; i++) {
         const windowHeight = window.innerHeight;
         const elementTop = reveals[i].getBoundingClientRect().top;
-        const elementVisible = 80;
-        if (elementTop < windowHeight - elementVisible) {
-          reveals[i].classList.add("active");
-        }
+        if (elementTop < windowHeight - 80) { reveals[i].classList.add("active"); }
       }
     }
     window.addEventListener("scroll", revealSections);
     window.addEventListener("load", revealSections);
 
+    // ── GLISSEMENT 2D SUBTILE (SANS EFFET PLASTIQUE 3D) ──
+    if (window.innerWidth > 900) {
+      document.querySelectorAll('.interactive-mesh').forEach(item => {
+        const img = item.querySelector('img');
+        
+        item.addEventListener('mousemove', (e) => {
+          const rect = item.getBoundingClientRect();
+          const ratioX = (e.clientX - rect.left) / rect.width;
+          const ratioY = (e.clientY - rect.top) / rect.height;
+          
+          // Traduit la position en pixels de déplacement (Max 15px de décalage intérieur)
+          const moveX = (ratioX - 0.5) * -15; 
+          const moveY = (ratioY - 0.5) * -15; 
+          
+          img.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          // Revient à sa position centrale initiale en douceur
+          img.style.transform = 'translate(0px, 0px)';
+        });
+      });
+    }
+
+    // ── TRANSLATIONS ENGINE ──
     const translations = {
       en: {
         nav_work: "Work", nav_services: "Services", nav_process: "Process", nav_cta: "Get a Quote",
         hero_title: 'Make your product<br><span class="accent-text">impossible to ignore.</span>',
         hero_desc: "Shoppers buy what looks real. We turn your product into stunning 3D visuals and videos — so people stop scrolling and start buying.",
-        hero_btn_primary: 'Start a project <i data-lucide="arrow-right" size="16"></i>',
-        hero_btn_secondary: "See the work",
+        hero_btn_primary: 'Start a project <i data-lucide="arrow-right" size="16"></i>', hero_btn_secondary: "See the work",
         tick_1: "Product Visualization", tick_2: "Product Animation", tick_3: "AI Video Generation", tick_4: "Ecommerce Brands", tick_5: "4K Rendering",
         work_title: "The visuals that sell.", work_desc: "Product renders, animations, and premium 3D simulations — built to perform on ads, landing pages, and social media.",
         p1_tag: "Dynamic Simulation", p1_title: "Café — Roasted Beans Explosion",
@@ -476,8 +498,7 @@
         nav_work: "Portfolio", nav_services: "Expertises", nav_process: "Méthode", nav_cta: "Discuter d'un projet",
         hero_title: 'Donnez à votre produit<br><span class="accent-text">le visuel qu’il mérite.</span>',
         hero_desc: "En ligne, l'œil achète avant l'esprit. Nous concevons des visuels et vidéos 3D ultra-réalistes taillés pour stopper le scroll, capter l'attention et maximiser vos ventes.",
-        hero_btn_primary: 'Lancer un projet <i data-lucide="arrow-right" size="16"></i>',
-        hero_btn_secondary: "Voir nos réalisations",
+        hero_btn_primary: 'Lancer un projet <i data-lucide="arrow-right" size="16"></i>', hero_btn_secondary: "Voir nos réalisations",
         tick_1: "Modélisation Produit", tick_2: "Animation Publicitaire 3D", tick_3: "Vidéos IA Immersives", tick_4: "DTC & Marques E-com", tick_5: "Rendus Studio 4K",
         work_title: "Des visuels qui font vendre.", work_desc: "Modélisations, packshots et animations 3D premium — optimisés pour vos publicités, landing pages et réseaux sociaux.",
         p1_tag: "Simulation Organique", p1_title: "Café — Éclatement dynamique de grains torréfiés",
@@ -499,6 +520,7 @@
         f_link1: "Portfolio", f_link2: "Expertises", f_link3: "Contact"
       }
     };
+
     function switchLang(lang) {
       document.querySelectorAll('.lang-btn').forEach(btn => { btn.classList.remove('active'); if(btn.innerText.toLowerCase() === lang) { btn.classList.add('active'); } });
       document.documentElement.lang = lang;
