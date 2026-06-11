@@ -88,7 +88,7 @@
     .btn-secondary { color: var(--text-main); border: 1px solid var(--border-bright); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* HERO */
+    /* HERO WITH FUSED GLOW */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -104,11 +104,16 @@
     }
     @keyframes heroLoad { to { opacity: 1; transform: translateY(0); } }
 
+    /* Le halo descend maintenant jusqu'en bas du hero sans coupure */
     .hero-glow {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 100vw; height: 80vh;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-      z-index: -1; opacity: 0.5; pointer-events: none;
+      position: absolute; 
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 75%),
+                  linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+      z-index: -1; 
+      opacity: 0.7; 
+      pointer-events: none;
     }
     .hero h1 {
       font-family: var(--font-display);
@@ -121,14 +126,16 @@
     }
     .hero-btns { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
 
-    /* TICKER */
+    /* TICKER INTEGRATION */
     .ticker {
       padding: 24px 1.5rem;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: center;
-      background: var(--bg);
+      background: var(--bg); /* Fusion parfaite avec le bas du dégradé */
+      position: relative;
+      z-index: 2;
     }
     .ticker-content { 
       display: flex; gap: 3rem; align-items: center; justify-content: center; flex-wrap: wrap; opacity: 0.4; 
@@ -179,14 +186,13 @@
       will-change: transform;
     }
     
-    /* Zoom très léger et doux sur les vidéos au survol */
     .p-item:hover video { transform: scale(1.03); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 
-    /* LES IMAGES GLISSENT EN 2D (SANS EFFET 3D PLASTIQUE) */
+    /* LES IMAGES GLISSENT EN 2D SANS TOUCHER AU CADRE */
     .p-item.interactive-mesh img {
-        width: 106%;  /* 6% de rab pour permettre le mouvement sans laisser de blanc */
+        width: 106%;  
         height: 106%;
-        top: -3%;     /* Centre l'image de base */
+        top: -3%;     
         left: -3%;
         transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -443,7 +449,7 @@
     window.addEventListener("scroll", revealSections);
     window.addEventListener("load", revealSections);
 
-    // ── GLISSEMENT 2D SUBTILE (SANS EFFET PLASTIQUE 3D) ──
+    // ── GLISSEMENT 2D DISCRET ET PROPRE ──
     if (window.innerWidth > 900) {
       document.querySelectorAll('.interactive-mesh').forEach(item => {
         const img = item.querySelector('img');
@@ -453,7 +459,6 @@
           const ratioX = (e.clientX - rect.left) / rect.width;
           const ratioY = (e.clientY - rect.top) / rect.height;
           
-          // Traduit la position en pixels de déplacement (Max 15px de décalage intérieur)
           const moveX = (ratioX - 0.5) * -15; 
           const moveY = (ratioY - 0.5) * -15; 
           
@@ -461,7 +466,6 @@
         });
         
         item.addEventListener('mouseleave', () => {
-          // Revient à sa position centrale initiale en douceur
           img.style.transform = 'translate(0px, 0px)';
         });
       });
@@ -512,7 +516,7 @@
         srv1_title: "Packshots & Rendus 3D", srv1_desc: "Des images produit d'une netteté absolue sous tous les angles. Idéal pour sublimer vos boutiques Shopify, Amazon et vos packagings imprimés.",
         srv2_title: "Vidéos & Animations Publicitaires", srv2_desc: "Vues éclatées, simulations fluides et mouvements caméra audacieux. Nous mettons en scène les forces de votre produit pour captiver instantanément l'acheteur.",
         prc_title: "Zéro friction. Un rendu d'élite.",
-        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identité de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
+        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identity de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
         step2_title: "Modélisation Haute Précision", step2_desc: "Réplication numérique de vos produits au micromètre près. Nous sculptons les textures, matières et éclairages pour un réalisme saisissant.",
         step3_title: "Calcul 4K & Livraison Clés en Main", step3_desc: "Vos rendus sont calculés dans la plus haute résolution existante, prêts à être déployés sur vos canaux d'acquisition et de conversion.",
         cta_title: "Prêt à surclasser la concurrence ?", cta_desc: "Donnez à vos tunnels de vente la puissance visuelle des plus grandes marques mondiales.",
