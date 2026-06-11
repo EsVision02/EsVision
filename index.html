@@ -127,15 +127,15 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       display: flex;
-      justify-content: center; /* Centre la banderole horizontalement */
+      justify-content: center;
       background: var(--bg);
     }
     .ticker-content { 
       display: flex; 
       gap: 3rem; 
       align-items: center; 
-      justify-content: center; /* Centre le contenu à l'intérieur */
-      flex-wrap: wrap; /* Permet un retour propre si l'écran est petit */
+      justify-content: center; 
+      flex-wrap: wrap; 
       opacity: 0.4; 
     }
     .ticker-item { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
@@ -167,11 +167,23 @@
     .p-item video, .p-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
     .p-item:hover video, .p-item:hover img { transform: scale(1.05); }
 
+    /* SPÉCIFIQUE CHAMBRE KC : Déplacement fluide de gauche à droite au survol */
+    .p-item-8 img {
+      width: 150%; /* L'image s'agrandit horizontalement pour permettre le déplacement */
+      max-width: none;
+      object-position: left center; /* Position initiale calée à gauche */
+      transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1); /* Transition ultra douce */
+    }
+    .p-item-8:hover img {
+      transform: translateX(-33.33%); /* Décale l'image vers la gauche pour révéler la droite */
+    }
+
     .p-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 60%);
       padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end;
       opacity: 0; transition: opacity 0.4s ease;
+      z-index: 2;
     }
     .p-item:hover .p-overlay { opacity: 1; }
     .p-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
@@ -199,6 +211,18 @@
     /* FOOTER */
     footer { padding: 50px 0; border-top: 1px solid var(--border); }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+    
+    /* Style pour les liens du footer (Même couleur gris/blanc atténué que le copyright) */
+    .footer-links display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: var(--text-main); /* Devient blanc brillant au survol */
+    }
 
     /* MOBILE OPTIMIZATIONS */
     @media (max-width: 900px) {
@@ -211,6 +235,10 @@
       .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 { grid-column: span 1 !important; height: 240px; }
       .p-overlay { opacity: 1; padding: 1rem; }
       .p-title { font-size: 0.9rem; }
+      
+      /* Reset pour mobile sur la chambre KC afin d'éviter les bugs de débordement */
+      .p-item-8 img { width: 100%; }
+      .p-item-8:hover img { transform: none; }
 
       .bento-card, .card-wide { grid-column: span 12; padding: 2rem; }
       .btn { width: 100%; justify-content: center; }
