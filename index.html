@@ -104,7 +104,6 @@
     }
     @keyframes heroLoad { to { opacity: 1; transform: translateY(0); } }
 
-    /* Le halo descend maintenant jusqu'en bas du hero sans coupure */
     .hero-glow {
       position: absolute; 
       top: 0; left: 0;
@@ -133,7 +132,7 @@
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: center;
-      background: var(--bg); /* Fusion parfaite avec le bas du dégradé */
+      background: var(--bg);
       position: relative;
       z-index: 2;
     }
@@ -175,20 +174,25 @@
     }
     .p-item:hover { border-color: rgba(255,46,77,0.4); transform: translateY(-4px); }
     
+    .p-media-wrapper {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
     .p-item video, .p-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       will-change: transform;
     }
     
     .p-item:hover video { transform: scale(1.03); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 
-    /* LES IMAGES GLISSENT EN 2D SANS TOUCHER AU CADRE */
     .p-item.interactive-mesh img {
         width: 106%;  
         height: 106%;
@@ -199,7 +203,7 @@
 
     .p-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 60%);
       padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end;
       opacity: 0; transition: opacity 0.4s ease;
       z-index: 2;
@@ -235,21 +239,68 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
     .footer-links a:hover { color: var(--text-main); }
 
-    /* MOBILE */
+    /* ── REFONTE COMPLÈTE DE LA VERSION MOBILE VIA MEDIA QUERY ── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .hero { min-height: 100vh; padding: 0 1rem; }
-      .hero h1 { font-size: 2.8rem; }
-      .ticker-content { gap: 1.5rem; }
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; gap: 12px; }
-      .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 { grid-column: span 1 !important; height: 240px; }
-      .p-overlay { opacity: 1; padding: 1rem; }
-      .p-title { font-size: 0.9rem; }
-      .p-item.interactive-mesh:hover img { transform: none !important; }
-      .bento-card, .card-wide { grid-column: span 12; padding: 2rem; }
-      .btn { width: 100%; justify-content: center; }
-      .hero-btns { flex-direction: column; width: 100%; }
-      .process-step { flex-direction: column; gap: 1rem; padding: 2rem 0; }
+      .hero { min-height: 85vh; padding: 80px 1rem 40px 1rem; }
+      .hero h1 { font-size: 2.3rem; line-height: 1.2; }
+      .hero p { font-size: 0.95rem; margin-bottom: 2rem; }
+      .hero-btns { flex-direction: column; width: 100%; gap: 10px; }
+      .btn { width: 100%; justify-content: center; padding: 16px; }
+      
+      .ticker-content { gap: 1.5rem; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
+      .ticker-item { font-size: 0.7rem; }
+
+      /* Le portfolio passe en mode liste : tout s'affiche verticalement, proprement */
+      #work { padding: 60px 0; }
+      .portfolio-grid { display: flex; flex-direction: column; gap: 32px; }
+      
+      .p-item { 
+        display: flex;
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        height: auto !important; /* Libère la hauteur forcée desktop */
+      }
+      .p-item:hover { transform: none; }
+
+      /* Le conteneur du média garde un format d'image propre */
+      .p-media-wrapper {
+        position: relative;
+        width: 100%;
+        height: 250px; /* Hauteur harmonieuse sur mobile */
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+      .p-item video, .p-item img { position: absolute; top:0; left:0; width:100%; height:100%; }
+      .p-item.interactive-mesh img { width: 100%; height: 100%; top: 0; left: 0; }
+
+      /* Les textes sortent de l'image et s'affichent en dessous pour une lisibilité parfaite */
+      .p-overlay {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        background: transparent;
+        padding: 12px 4px 0 4px;
+      }
+      .p-tag { font-size: 0.65rem; margin-bottom: 4px; }
+      .p-title { font-size: 1rem; color: var(--text-main); }
+
+      /* Bento & reste */
+      .bento-grid { display: flex; flex-direction: column; gap: 1rem; }
+      .bento-card, .card-wide { padding: 1.5rem; border-radius: 16px; }
+      .bento-card h3 { font-size: 1.3rem; }
+      
+      .process-step { flex-direction: column; gap: 8px; padding: 1.5rem 0; }
+      .step-num { font-size: 2rem; width: auto; }
+      .step-content h3 { font-size: 1.2rem; }
+      
+      #contact { padding: 60px 0; }
+      .cta-box { padding: 40px 20px; border-radius: 20px; }
+      .cta-box h2 { font-size: 1.8rem; }
+      
+      .footer-inner { flex-direction: column-reverse; text-align: center; gap: 1rem; }
     }
   </style>
 </head>
@@ -304,35 +355,45 @@
 
       <div class="portfolio-grid">
         <div class="p-item p-item-1 reveal">
-          <video src="./assets/cafe.mp4" autoplay muted loop playsinline></video>
+          <div class="p-media-wrapper">
+            <video src="./assets/cafe.mp4" autoplay muted loop playsinline></video>
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p1_tag">Dynamic Simulation</div>
             <div class="p-title" data-t="p1_title">Café — Roasted Beans Explosion</div>
           </div>
         </div>
         <div class="p-item p-item-2 reveal">
-          <video src="./assets/clavier.mp4" autoplay muted loop playsinline></video>
+          <div class="p-media-wrapper">
+            <video src="./assets/clavier.mp4" autoplay muted loop playsinline></video>
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p2_tag">Exploded View / Tech</div>
             <div class="p-title" data-t="p2_title">Clavier — Mechanical Keyboard Anatomy</div>
           </div>
         </div>
         <div class="p-item p-item-3 reveal">
-          <video src="./assets/too-faced.mp4" autoplay muted loop playsinline></video>
+          <div class="p-media-wrapper">
+            <video src="./assets/too-faced.mp4" autoplay muted loop playsinline></video>
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p3_tag">Luxury Cosmetics</div>
             <div class="p-title" data-t="p3_title">Too Faced — Golden Compact Blush</div>
           </div>
         </div>
         <div class="p-item p-item-4 reveal">
-          <video src="./assets/lancaster.mp4" autoplay muted loop playsinline></video>
+          <div class="p-media-wrapper">
+            <video src="./assets/lancaster.mp4" autoplay muted loop playsinline></video>
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p4_tag">Skincare Premium</div>
             <div class="p-title" data-t="p4_title">Lancaster — Golden Lift Sculpting Cream</div>
           </div>
         </div>
         <div class="p-item p-item-5 reveal">
-          <video src="./assets/daktarin.mp4" autoplay muted loop playsinline></video>
+          <div class="p-media-wrapper">
+            <video src="./assets/daktarin.mp4" autoplay muted loop playsinline></video>
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p5_tag">Medical / Pharma</div>
             <div class="p-title" data-t="p5_title">Daktarin — Cinematic Product Reveal</div>
@@ -340,7 +401,9 @@
         </div>
         
         <div class="p-item p-item-6 interactive-mesh reveal">
-          <img src="./assets/mne.png" alt="Mné Biotech Render">
+          <div class="p-media-wrapper">
+            <img src="./assets/mne.png" alt="Mné Biotech Render">
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p6_tag">Biotech & Pharma</div>
             <div class="p-title" data-t="p6_title">Mné — Premium Smart Capsule</div>
@@ -348,7 +411,9 @@
         </div>
         
         <div class="p-item p-item-7 interactive-mesh reveal">
-          <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
+          <div class="p-media-wrapper">
+            <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
             <div class="p-title" data-t="p7_title">M4 Mac — Minimalist Studio Render</div>
@@ -356,7 +421,9 @@
         </div>
         
         <div class="p-item p-item-8 interactive-mesh reveal">
-          <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
+          <div class="p-media-wrapper">
+            <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
+          </div>
           <div class="p-overlay">
             <div class="p-tag" data-t="p8_tag">3D Environment</div>
             <div class="p-title" data-t="p8_title">Chambre KC — Isometric Set Design</div>
@@ -449,7 +516,7 @@
     window.addEventListener("scroll", revealSections);
     window.addEventListener("load", revealSections);
 
-    // ── GLISSEMENT 2D DISCRET ET PROPRE ──
+    // ── GLISSEMENT 2D DISCRET (UNIQUEMENT SUR DESKTOP) ──
     if (window.innerWidth > 900) {
       document.querySelectorAll('.interactive-mesh').forEach(item => {
         const img = item.querySelector('img');
@@ -516,7 +583,7 @@
         srv1_title: "Packshots & Rendus 3D", srv1_desc: "Des images produit d'une netteté absolue sous tous les angles. Idéal pour sublimer vos boutiques Shopify, Amazon et vos packagings imprimés.",
         srv2_title: "Vidéos & Animations Publicitaires", srv2_desc: "Vues éclatées, simulations fluides et mouvements caméra audacieux. Nous mettons en scène les forces de votre produit pour captiver instantanément l'acheteur.",
         prc_title: "Zéro friction. Un rendu d'élite.",
-        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identity de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
+        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identité de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
         step2_title: "Modélisation Haute Précision", step2_desc: "Réplication numérique de vos produits au micromètre près. Nous sculptons les textures, matières et éclairages pour un réalisme saisissant.",
         step3_title: "Calcul 4K & Livraison Clés en Main", step3_desc: "Vos rendus sont calculés dans la plus haute résolution existante, prêts à être déployés sur vos canaux d'acquisition et de conversion.",
         cta_title: "Prêt à surclasser la concurrence ?", cta_desc: "Donnez à vos tunnels de vente la puissance visuelle des plus grandes marques mondiales.",
