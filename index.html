@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
   <title>EsVision | Design & Animation 3D Produit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,8 +25,9 @@
       --nav-height: 72px;
     }
 
+    /* Reset strict sans transitions au démarrage */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; background: var(--bg); }
+    html { background: var(--bg); }
     body {
       background: var(--bg);
       color: var(--text-main);
@@ -77,9 +78,9 @@
     .btn-secondary { color: var(--text-main); border: 1px solid var(--border-bright); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* HERO - PLUS AUCUNE ANIMATION OU TRANSLATE ICI */
+    /* HERO STABLE - AUCUN RETARD, AUCUN EFFET DE GLISSEMENT */
     .hero {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -87,6 +88,7 @@
       position: relative;
       text-align: center;
       padding-top: var(--nav-height);
+      box-sizing: border-box;
     }
 
     .hero-glow {
@@ -232,15 +234,17 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
     .footer-links a:hover { color: var(--text-main); }
 
-    /* MOBILE RESPONSIVE CLEANUP */
+    /* MOBILE RESPONSIVE NETTOYÉ */
     @media (max-width: 900px) {
+      html, body { scroll-behavior: auto !important; } /* Désactive le smooth scroll natif instable au chargement mobile */
       .nav-links { display: none; }
       .hero { 
-        min-height: 100vh; 
-        padding: var(--nav-height) 1rem 3rem 1rem; 
+        height: calc(100vh - var(--nav-height));
+        min-height: -webkit-fill-available;
+        padding: 2rem 1rem; 
         justify-content: center; 
       }
-      .hero h1 { font-size: 2.3rem; }
+      .hero h1 { font-size: 2.2rem; }
       .ticker-content { gap: 1.5rem; }
       
       .portfolio-grid { 
@@ -271,6 +275,13 @@
   </style>
 </head>
 <body>
+
+  <!-- SCRIPT FLASH DE PROTECTION DU POSITIONNEMENT HAUT DE PAGE -->
+  <script>
+    window.onbeforeunload = function () { window.scrollTo(0, 0); };
+    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  </script>
 
   <nav>
     <div class="container">
@@ -369,7 +380,7 @@
           <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
-            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimaliste et éclairage de studio</div>
+            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimalist et éclairage de studio</div>
           </div>
         </div>
         
@@ -384,6 +395,7 @@
     </div>
   </section>
 
+  <!-- PROFILE SECTION -->
   <section id="profile">
     <div class="container">
       <div class="section-head">
@@ -498,6 +510,15 @@
   </footer>
 
   <script>
+    // Forçage immédiat tout en haut pendant le chargement complet des assets
+    window.scrollTo(0, 0);
+    document.addEventListener("DOMContentLoaded", () => {
+      window.scrollTo(0, 0);
+    });
+    window.addEventListener("load", () => {
+      setTimeout(() => { window.scrollTo(0, 0); }, 10);
+    });
+
     // ── GLISSEMENT 2D DISCRET ET PROPRE (DESKTOP ONLY) ──
     if (window.innerWidth > 900) {
       document.querySelectorAll('.interactive-mesh').forEach(item => {
