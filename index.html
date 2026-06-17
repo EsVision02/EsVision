@@ -40,19 +40,6 @@
     .accent-text { color: var(--accent); }
     .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid var(--border); }
 
-    /* REVEAL SYSTEM (DESKTOP ONLY) */
-    @media (min-width: 901px) {
-      .reveal {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-      }
-      .reveal.active {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
@@ -100,11 +87,7 @@
       position: relative;
       text-align: center;
       padding-top: var(--nav-height);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: heroLoad 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
-    @keyframes heroLoad { to { opacity: 1; transform: translateY(0); } }
 
     .hero-glow {
       position: absolute; 
@@ -332,41 +315,41 @@
 
   <section id="work">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <h2 data-t="work_title">Des visuels conçus pour marquer les esprits.</h2>
         <p data-t="work_desc">Modélisations fines, packshots épurés et animations premium. Des assets optimisés pour vos campagnes publicitaires, sites e-commerce et réseaux sociaux.</p>
       </div>
 
       <div class="portfolio-grid">
-        <div class="p-item p-item-1 reveal">
+        <div class="p-item p-item-1">
           <video src="./assets/cafe.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p1_tag">Simulation Organique</div>
             <div class="p-title" data-t="p1_title">Café — Éclatement dynamique de grains torréfiés</div>
           </div>
         </div>
-        <div class="p-item p-item-2 reveal">
+        <div class="p-item p-item-2">
           <video src="./assets/clavier.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p2_tag">Rendu Technique / Macro</div>
             <div class="p-title" data-t="p2_title">Clavier — Vue éclatée de l'anatomie mécanique</div>
           </div>
         </div>
-        <div class="p-item p-item-3 reveal">
+        <div class="p-item p-item-3">
           <video src="./assets/too-faced.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p3_tag">Cosmétique Premium</div>
             <div class="p-title" data-t="p3_title">Too Faced — Jeu de lumière sur poudrier blush doré</div>
           </div>
         </div>
-        <div class="p-item p-item-4 reveal">
+        <div class="p-item p-item-4">
           <video src="./assets/lancaster.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p4_tag">Soin & Beauté de Luxe</div>
             <div class="p-title" data-t="p4_title">Lancaster — Crème Sculptante Golden Lift en action</div>
           </div>
         </div>
-        <div class="p-item p-item-5 reveal">
+        <div class="p-item p-item-5">
           <video src="./assets/daktarin.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p5_tag">Pharma & Médical</div>
@@ -374,7 +357,7 @@
           </div>
         </div>
         
-        <div class="p-item p-item-6 interactive-mesh reveal">
+        <div class="p-item p-item-6 interactive-mesh">
           <img src="./assets/mne.png" alt="Mné Biotech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p6_tag">Biotech & Innovation</div>
@@ -382,15 +365,15 @@
           </div>
         </div>
         
-        <div class="p-item p-item-7 interactive-mesh reveal">
+        <div class="p-item p-item-7 interactive-mesh">
           <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
-            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimaliste et éclairage de studio</div>
+            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimalist et éclairage de studio</div>
           </div>
         </div>
         
-        <div class="p-item p-item-8 interactive-mesh reveal">
+        <div class="p-item p-item-8 interactive-mesh">
           <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
           <div class="p-overlay">
             <div class="p-tag" data-t="p8_tag">Environnement 3D</div>
@@ -401,8 +384,7 @@
     </div>
   </section>
 
-  <!-- PROFILE SECTION -->
-  <section id="profile" class="reveal">
+  <section id="profile">
     <div class="container">
       <div class="section-head">
         <h2 data-t="prof_title">Derrière les images.</h2>
@@ -444,7 +426,7 @@
     </div>
   </section>
 
-  <section id="services" class="reveal">
+  <section id="services">
     <div class="container">
       <div class="section-head">
         <h2 data-t="srv_title">Des solutions visuelles sur-mesure.</h2>
@@ -464,7 +446,7 @@
     </div>
   </section>
 
-  <section id="process" class="reveal">
+  <section id="process">
     <div class="container">
       <div class="section-head">
         <h2 data-t="prc_title">Le déroulement.</h2>
@@ -495,7 +477,7 @@
     </div>
   </section>
 
-  <section id="contact" class="container reveal">
+  <section id="contact" class="container">
     <div class="cta-box">
       <h2 data-t="cta_title">Un projet en tête ?</h2>
       <p data-t="cta_desc">Travaillons ensemble pour concevoir l'univers visuel qui correspond à votre marque.</p>
@@ -516,21 +498,7 @@
   </footer>
 
   <script>
-    // ── REVEAL SYSTEM ──
-    function revealSections() {
-      if (window.innerWidth > 900) {
-        const reveals = document.querySelectorAll(".reveal");
-        for (let i = 0; i < reveals.length; i++) {
-          const windowHeight = window.innerHeight;
-          const elementTop = reveals[i].getBoundingClientRect().top;
-          if (elementTop < windowHeight - 80) { reveals[i].classList.add("active"); }
-        }
-      }
-    }
-    window.addEventListener("scroll", revealSections);
-    window.addEventListener("load", revealSections);
-
-    // ── GLISSEMENT 2D DISCRET ET PROPRE ──
+    // ── GLISSEMENT 2D DISCRET ET PROPRE (DESKTOP ONLY) ──
     if (window.innerWidth > 900) {
       document.querySelectorAll('.interactive-mesh').forEach(item => {
         const img = item.querySelector('img');
