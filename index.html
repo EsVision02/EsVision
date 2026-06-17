@@ -9,6 +9,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Inter:wght=300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- FORCE LA RACINE DU SCROLL AVANT TOUT CALCUL DE RENDU -->
+  <script>
+    // 1. Désactive complètement la mémoire de position du navigateur
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    // 2. Supprime l'ancre (#) de l'URL si elle existe pour éviter que le navigateur ne saute en bas
+    if (window.location.hash) {
+      history.replaceState(null, null, ' ');
+    }
+    // 3. Force le scroll absolu au point 0
+    window.scrollTo(0, 0);
+  </script>
+
   <style>
     :root {
       --bg: #050505;
@@ -29,9 +43,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { background: var(--bg); scroll-behavior: smooth; }
     
-    /* Le body commence invisible pour masquer le repositionnement mobile */
     body {
-      opacity: 0;
       background: var(--bg);
       color: var(--text-main);
       font-family: var(--font-body);
@@ -81,7 +93,7 @@
     .btn-secondary { color: var(--text-main); border: 1px solid var(--border-bright); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* HERO STABLE */
+    /* HERO */
     .hero {
       height: 100vh;
       display: flex;
@@ -276,14 +288,6 @@
       .process-step { flex-direction: column; gap: 1rem; padding: 2rem 0; }
     }
   </style>
-
-  <!-- REPOSITIONNEMENT INVISIBLE ET IMMEDIAT AVANT L'AFFICHAGE -->
-  <script>
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-  </script>
 </head>
 <body>
 
@@ -513,16 +517,9 @@
   </footer>
 
   <script>
-    // Événement exécuté le plus tôt possible pour figer le haut de page
-    function forceScrollTop() {
-      window.scrollTo(0, 0);
-      document.body.style.opacity = "1"; // Le site s'affiche uniquement quand il est calé en haut
-    }
-
-    // Sécurité multiple pour s'assurer que le scroll top est immédiat
-    window.addEventListener('DOMContentLoaded', forceScrollTop);
-    window.addEventListener('load', forceScrollTop);
-    setTimeout(forceScrollTop, 50);
+    // Sécurité supplémentaire : Ré-exécution du scroll dès que l'arbre HTML est prêt
+    window.addEventListener('DOMContentLoaded', () => { window.scrollTo(0, 0); });
+    window.addEventListener('load', () => { window.scrollTo(0, 0); });
 
     // ── GLISSEMENT 2D DISCRET ET PROPRE (DESKTOP ONLY) ──
     if (window.innerWidth > 900) {
@@ -593,7 +590,7 @@
         p4_tag: "Soin & Beauté de Luxe", p4_title: "Lancaster — Crème Sculptante Golden Lift en action",
         p5_tag: "Pharma & Médical", p5_title: "Daktarin — Révélation cinématique et textures fluides",
         p6_tag: "Biotech & Innovation", p6_title: "Mné — Écrin digital pour capsule intelligente",
-        p7_tag: "Hardware & Tech", p7_title: "M4 Mac — Set-up minimaliste et éclairage de studio",
+        p7_tag: "Hardware & Tech", p7_title: "M4 Mac — Set-up minimalist et éclairage de studio",
         p8_tag: "Environnement 3D", p8_title: "Chambre KC — Conception de décor isométrique gaming",
         prof_title: "Derrière les images.",
         prof_meta_name: "Créateur", prof_meta_age: "Âge", prof_meta_focus: "Focus",
