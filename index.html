@@ -9,17 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Inter:wght=300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- FORCE LA RACINE DU SCROLL AVANT TOUT CALCUL DE RENDU -->
+  <!-- CORRECTIF NATIF : FORCE LE DEBUT SANS MASQUER -->
   <script>
-    // 1. Désactive complètement la mémoire de position du navigateur
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    // 2. Supprime l'ancre (#) de l'URL si elle existe pour éviter que le navigateur ne saute en bas
     if (window.location.hash) {
       history.replaceState(null, null, ' ');
     }
-    // 3. Force le scroll absolu au point 0
     window.scrollTo(0, 0);
   </script>
 
@@ -93,7 +90,7 @@
     .btn-secondary { color: var(--text-main); border: 1px solid var(--border-bright); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* HERO */
+    /* HERO ANIMATION DYNAMIQUE */
     .hero {
       height: 100vh;
       display: flex;
@@ -116,16 +113,20 @@
       opacity: 0.7; 
       pointer-events: none;
     }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.3rem, 7.5vw, 5.5rem);
-      line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.04em;
+
+    /* Entrées animées fluides du Hero */
+    .hero h1, .hero p, .hero-btns {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
-    .hero p {
-      max-width: 650px; margin: 0 auto 2.5rem;
-      color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 400; line-height: 1.6;
+    .hero h1 { animation-delay: 0.2s; font-family: var(--font-display); font-size: clamp(2.3rem, 7.5vw, 5.5rem); line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.04em; }
+    .hero p { animation-delay: 0.4s; max-width: 650px; margin: 0 auto 2.5rem; color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 400; line-height: 1.6; }
+    .hero-btns { animation-delay: 0.6s; display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
-    .hero-btns { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
 
     /* TICKER */
     .ticker {
@@ -145,7 +146,9 @@
 
     /* PORTFOLIO GRID */
     #work { padding: 120px 0; background: var(--surface-low); }
-    .section-head { margin-bottom: 4rem; }
+    .section-head { margin-bottom: 4rem; opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .section-head.visible { opacity: 1; transform: translateY(0); }
+    
     .section-head h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; }
     .section-head p { color: var(--text-muted); font-size: 1.05rem; max-width: 60ch; }
 
@@ -172,8 +175,11 @@
       border-radius: 16px;
       border: 1px solid var(--border);
       cursor: pointer;
-      transition: border-color 0.4s ease, transform 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: border-color 0.4s ease, transform 0.4s ease, opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
+    .p-item.visible { opacity: 1; transform: translateY(0); }
     .p-item:hover { border-color: rgba(255,46,77,0.4); transform: translateY(-4px); }
     
     .p-item video, .p-item img {
@@ -185,16 +191,16 @@
       top: 0;
       left: 0;
       will-change: transform;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
     
-    .p-item:hover video { transform: scale(1.03); transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+    .p-item:hover video { transform: scale(1.03); }
 
     .p-item.interactive-mesh img {
         width: 106%;  
         height: 106%;
         top: -3%;     
         left: -3%;
-        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .p-overlay {
@@ -212,19 +218,22 @@
     /* PROFILE SECTION */
     #profile { padding: 120px 0; background: var(--bg); }
     .profile-container { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; align-items: stretch; }
-    .profile-main { grid-column: span 7; padding: 3.5rem; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
+    .profile-main { grid-column: span 7; padding: 3.5rem; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateX(-30px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
     .profile-stats { grid-column: span 5; display: flex; flex-direction: column; gap: 1.5rem; }
-    .stat-card { padding: 2rem; border-radius: 16px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .stat-card { padding: 2rem; border-radius: 16px; flex: 1; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateX(30px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    
+    .profile-main.visible, .stat-card.visible { opacity: 1; transform: translateX(0); }
+
     .profile-meta { display: flex; gap: 2.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; flex-wrap: wrap; }
     .meta-item span { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 4px; }
     .meta-item strong { font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main); }
     .profile-text p { color: var(--text-muted); margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.7; }
-    .profile-text p:last-child { margin-bottom: 0; }
 
     /* SERVICES & BENTO */
     #services { padding: 120px 0; background: var(--surface-low); }
     .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-    .bento-card { grid-column: span 4; padding: 3rem; border-radius: 24px; transition: all 0.3s ease; }
+    .bento-card { grid-column: span 4; padding: 3rem; border-radius: 24px; opacity: 0; transform: scale(0.95); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .bento-card.visible { opacity: 1; transform: scale(1); }
     .bento-card:hover { border-color: rgba(255,46,77,0.4); background: rgba(255,255,255,0.05); }
     .bento-card i { color: var(--accent); margin-bottom: 1.5rem; display: block; }
     .bento-card h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1rem; }
@@ -232,14 +241,16 @@
 
     /* PROCESS */
     #process { padding: 120px 0; }
-    .process-step { display: flex; gap: 3rem; padding: 3rem 0; border-bottom: 1px solid var(--border); }
+    .process-step { display: flex; gap: 3rem; padding: 3rem 0; border-bottom: 1px solid var(--border); opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .process-step.visible { opacity: 1; transform: translateY(0); }
     .step-num { font-family: var(--font-display); font-size: 3rem; font-weight: 800; color: var(--accent); opacity: 0.2; width: 80px; }
     .step-content h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.75rem; }
     .step-content p { color: var(--text-muted); }
 
     /* CTA */
     #contact { padding: 120px 0; }
-    .cta-box { padding: 100px 40px; border-radius: 40px; text-align: center; border: 1px solid rgba(255,46,77,0.2); }
+    .cta-box { padding: 100px 40px; border-radius: 40px; text-align: center; border: 1px solid rgba(255,46,77,0.2); opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .cta-box.visible { opacity: 1; transform: translateY(0); }
     .cta-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; }
 
     /* FOOTER */
@@ -253,32 +264,15 @@
     @media (max-width: 900px) {
       html { scroll-behavior: auto !important; }
       .nav-links { display: none; }
-      .hero { 
-        height: calc(100vh - var(--nav-height));
-        min-height: -webkit-fill-available;
-        padding: 2rem 1rem; 
-        justify-content: center; 
-      }
+      .hero { height: calc(100vh - var(--nav-height)); min-height: -webkit-fill-available; padding: 2rem 1rem; justify-content: center; }
       .hero h1 { font-size: 2.2rem; }
       .ticker-content { gap: 1.5rem; }
       
-      .portfolio-grid { 
-        display: flex; 
-        flex-direction: column; 
-        gap: 16px; 
-        height: auto !important; 
-      }
-      .p-item { 
-        position: relative; 
-        width: 100% !important; 
-        height: 280px !important; 
-        grid-column: auto !important; 
-        grid-row: auto !important; 
-      }
+      .portfolio-grid { display: flex; flex-direction: column; gap: 16px; height: auto !important; }
+      .p-item { position: relative; width: 100% !important; height: 280px !important; grid-column: auto !important; grid-row: auto !important; }
       
       .p-overlay { opacity: 1; padding: 1.5rem; background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 70%); }
       .p-title { font-size: 1rem; }
-      .p-item.interactive-mesh:hover img { transform: none !important; }
       
       .profile-container { grid-template-columns: 1fr; }
       .profile-main, .profile-stats { grid-column: span 12; padding: 2rem; }
@@ -334,41 +328,41 @@
 
   <section id="work">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 data-t="work_title">Des visuels conçus pour marquer les esprits.</h2>
         <p data-t="work_desc">Modélisations fines, packshots épurés et animations premium. Des assets optimisés pour vos campagnes publicitaires, sites e-commerce et réseaux sociaux.</p>
       </div>
 
       <div class="portfolio-grid">
-        <div class="p-item p-item-1">
+        <div class="p-item p-item-1 reveal">
           <video src="./assets/cafe.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p1_tag">Simulation Organique</div>
             <div class="p-title" data-t="p1_title">Café — Éclatement dynamique de grains torréfiés</div>
           </div>
         </div>
-        <div class="p-item p-item-2">
+        <div class="p-item p-item-2 reveal">
           <video src="./assets/clavier.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p2_tag">Rendu Technique / Macro</div>
             <div class="p-title" data-t="p2_title">Clavier — Vue éclatée de l'anatomie mécanique</div>
           </div>
         </div>
-        <div class="p-item p-item-3">
+        <div class="p-item p-item-3 reveal">
           <video src="./assets/too-faced.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p3_tag">Cosmétique Premium</div>
             <div class="p-title" data-t="p3_title">Too Faced — Jeu de lumière sur poudrier blush doré</div>
           </div>
         </div>
-        <div class="p-item p-item-4">
+        <div class="p-item p-item-4 reveal">
           <video src="./assets/lancaster.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p4_tag">Soin & Beauté de Luxe</div>
             <div class="p-title" data-t="p4_title">Lancaster — Crème Sculptante Golden Lift en action</div>
           </div>
         </div>
-        <div class="p-item p-item-5">
+        <div class="p-item p-item-5 reveal">
           <video src="./assets/daktarin.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
             <div class="p-tag" data-t="p5_tag">Pharma & Médical</div>
@@ -376,7 +370,7 @@
           </div>
         </div>
         
-        <div class="p-item p-item-6 interactive-mesh">
+        <div class="p-item p-item-6 interactive-mesh reveal">
           <img src="./assets/mne.png" alt="Mné Biotech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p6_tag">Biotech & Innovation</div>
@@ -384,7 +378,7 @@
           </div>
         </div>
         
-        <div class="p-item p-item-7 interactive-mesh">
+        <div class="p-item p-item-7 interactive-mesh reveal">
           <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
@@ -392,7 +386,7 @@
           </div>
         </div>
         
-        <div class="p-item p-item-8 interactive-mesh">
+        <div class="p-item p-item-8 interactive-mesh reveal">
           <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
           <div class="p-overlay">
             <div class="p-tag" data-t="p8_tag">Environnement 3D</div>
@@ -405,11 +399,11 @@
 
   <section id="profile">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 data-t="prof_title">Derrière les images.</h2>
       </div>
       <div class="profile-container">
-        <div class="profile-main glass">
+        <div class="profile-main glass reveal">
           <div class="profile-meta">
             <div class="meta-item">
               <span data-t="prof_meta_name">Créateur</span>
@@ -430,12 +424,12 @@
           </div>
         </div>
         <div class="profile-stats">
-          <div class="stat-card glass" style="border-left: 3px solid var(--accent);">
+          <div class="stat-card glass reveal" style="border-left: 3px solid var(--accent);">
             <i data-lucide="cpu" size="28" style="color: var(--accent); margin-bottom: 1rem;"></i>
             <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;" data-t="prof_card1_title">Expertise Blender</h4>
             <p style="font-size: 0.95rem; color: var(--text-muted);" data-t="prof_card1_desc">Maîtrise de la modélisation géométrique, du texturage sur-mesure et de la mise en lumière photoréaliste de vos produits.</p>
           </div>
-          <div class="stat-card glass">
+          <div class="stat-card glass reveal">
             <i data-lucide="target" size="28" style="color: var(--text-main); margin-bottom: 1rem;"></i>
             <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;" data-t="prof_card2_title">Sens de l'image</h4>
             <p style="font-size: 0.95rem; color: var(--text-muted);" data-t="prof_card2_desc">Chaque angle, ombre ou mouvement est pensé pour mettre en avant les atouts phares de votre produit et susciter l'intérêt.</p>
@@ -447,16 +441,16 @@
 
   <section id="services">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 data-t="srv_title">Des solutions visuelles sur-mesure.</h2>
       </div>
       <div class="bento-grid">
-        <div class="bento-card glass">
+        <div class="bento-card glass reveal">
           <i data-lucide="box" size="24"></i>
           <h3 data-t="srv1_title">Rendus Produit 3D</h3>
           <p data-t="srv1_desc">Des packshots nets et épurés sous toutes les coutures. Parfait pour valoriser vos fiches produits, catalogues et boutiques en ligne.</p>
         </div>
-        <div class="bento-card glass card-wide">
+        <div class="bento-card glass card-wide reveal">
           <i data-lucide="video" size="24"></i>
           <h3 data-t="srv2_title">Animations Publicitaires</h3>
           <p data-t="srv2_desc">Mouvements de caméra fluides, simulations dynamiques et jeux de textures. Des vidéos immersives conçues pour raconter votre produit et retenir l'attention dès les premières secondes.</p>
@@ -467,25 +461,25 @@
 
   <section id="process">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <h2 data-t="prc_title">Le déroulement.</h2>
       </div>
       <div class="process-steps">
-        <div class="process-step">
+        <div class="process-step reveal">
           <div class="step-num">01</div>
           <div class="step-content">
             <h3 data-t="step1_title">Direction Créative</h3>
             <p data-t="step1_desc">Échange autour de vos besoins, de l'univers de votre marque et de vos objectifs pour définir la trame visuelle idéale.</p>
           </div>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal">
           <div class="step-num">02</div>
           <div class="step-content">
             <h3 data-t="step2_title">Modélisation & Rendu</h3>
             <p data-t="step2_desc">Création et ajustement minutieux du produit dans Blender : travail sur les matériaux, les reliefs et l'éclairage studio.</p>
           </div>
         </div>
-        <div class="process-step">
+        <div class="process-step reveal">
           <div class="step-num">03</div>
           <div class="step-content">
             <h3 data-t="step3_title">Livraison Haute Définition</h3>
@@ -497,7 +491,7 @@
   </section>
 
   <section id="contact" class="container">
-    <div class="cta-box">
+    <div class="cta-box reveal">
       <h2 data-t="cta_title">Un projet en tête ?</h2>
       <p data-t="cta_desc">Travaillons ensemble pour concevoir l'univers visuel qui correspond à votre marque.</p>
       <a href="mailto:visione615@gmail.com" class="btn btn-primary" data-t="cta_btn">Contacter EsVision <i data-lucide="calendar" size="16"></i></a>
@@ -517,11 +511,24 @@
   </footer>
 
   <script>
-    // Sécurité supplémentaire : Ré-exécution du scroll dès que l'arbre HTML est prêt
+    // Sécurité absolue : Scroll en haut immédiat au chargement du DOM
     window.addEventListener('DOMContentLoaded', () => { window.scrollTo(0, 0); });
     window.addEventListener('load', () => { window.scrollTo(0, 0); });
 
-    // ── GLISSEMENT 2D DISCRET ET PROPRE (DESKTOP ONLY) ──
+    // ── ANIMATIONS DYNAMIQUES AU SCROLL (INTERSECTION OBSERVER) ──
+    const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // L'animation se joue une fois
+        }
+      });
+    }, revealOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── INTERACTIVE MESH MOUSE TRACKING (DESKTOP ONLY) ──
     if (window.innerWidth > 900) {
       document.querySelectorAll('.interactive-mesh').forEach(item => {
         const img = item.querySelector('img');
@@ -534,16 +541,16 @@
           const moveX = (ratioX - 0.5) * -15; 
           const moveY = (ratioY - 0.5) * -15; 
           
-          img.style.transform = `translate(${moveX}px, ${moveY}px)`;
+          img.style.transform = `scale(1.06) translate(${moveX}px, ${moveY}px)`;
         });
         
         item.addEventListener('mouseleave', () => {
-          img.style.transform = 'translate(0px, 0px)';
+          img.style.transform = 'scale(1) translate(0px, 0px)';
         });
       });
     }
 
-    // ── TRANSLATIONS ENGINE ──
+    // ── ENGINE DE TRADUCTION ──
     const translations = {
       en: {
         nav_work: "Portfolio", nav_profile: "Profile", nav_services: "Expertise", nav_process: "Method", nav_cta: "Get in touch",
