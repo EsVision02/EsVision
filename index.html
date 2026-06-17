@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>EsVision | Visuels 3D pour Marques E-commerce</title>
+  <title>EsVision | Design & Animation 3D Produit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght=700;800&family=Inter:wght=300;400;500;600&display=swap" rel="stylesheet" />
@@ -88,7 +88,7 @@
     .btn-secondary { color: var(--text-main); border: 1px solid var(--border-bright); }
     .btn-secondary:hover { background: rgba(255,255,255,0.05); }
 
-    /* HERO WITH FUSED GLOW */
+    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -116,16 +116,16 @@
     }
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 8vw, 6rem);
-      line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -0.04em;
+      font-size: clamp(2.3rem, 7.5vw, 5.5rem);
+      line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.04em;
     }
     .hero p {
-      max-width: 620px; margin: 0 auto 2.5rem;
-      color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; line-height: 1.6;
+      max-width: 650px; margin: 0 auto 2.5rem;
+      color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.15rem); font-weight: 400; line-height: 1.6;
     }
     .hero-btns { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
 
-    /* TICKER INTEGRATION */
+    /* TICKER */
     .ticker {
       padding: 24px 1.5rem;
       border-top: 1px solid var(--border);
@@ -145,7 +145,7 @@
     #work { padding: 120px 0; background: var(--surface-low); }
     .section-head { margin-bottom: 4rem; }
     .section-head h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 1rem; }
-    .section-head p { color: var(--text-muted); font-size: 1rem; max-width: 60ch; }
+    .section-head p { color: var(--text-muted); font-size: 1.05rem; max-width: 60ch; }
 
     .portfolio-grid {
       display: grid;
@@ -174,20 +174,14 @@
     }
     .p-item:hover { border-color: rgba(255,46,77,0.4); transform: translateY(-4px); }
     
-    .p-media-wrapper {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      overflow: hidden;
-    }
-
     .p-item video, .p-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       will-change: transform;
     }
     
@@ -203,7 +197,7 @@
 
     .p-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, transparent 50%);
       padding: 2rem; display: flex; flex-direction: column; justify-content: flex-end;
       opacity: 0; transition: opacity 0.4s ease;
       z-index: 2;
@@ -213,8 +207,20 @@
     .p-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
     .p-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; }
 
-    /* SERVICES */
-    #services { padding: 120px 0; }
+    /* PROFILE SECTION */
+    #profile { padding: 120px 0; background: var(--bg); }
+    .profile-container { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; align-items: stretch; }
+    .profile-main { grid-column: span 7; padding: 3.5rem; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; }
+    .profile-stats { grid-column: span 5; display: flex; flex-direction: column; gap: 1.5rem; }
+    .stat-card { padding: 2rem; border-radius: 16px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .profile-meta { display: flex; gap: 2.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; flex-wrap: wrap; }
+    .meta-item span { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 4px; }
+    .meta-item strong { font-family: var(--font-display); font-size: 1.25rem; color: var(--text-main); }
+    .profile-text p { color: var(--text-muted); margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.7; }
+    .profile-text p:last-child { margin-bottom: 0; }
+
+    /* SERVICES & BENTO */
+    #services { padding: 120px 0; background: var(--surface-low); }
     .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
     .bento-card { grid-column: span 4; padding: 3rem; border-radius: 24px; transition: all 0.3s ease; }
     .bento-card:hover { border-color: rgba(255,46,77,0.4); background: rgba(255,255,255,0.05); }
@@ -223,14 +229,16 @@
     .card-wide { grid-column: span 8; }
 
     /* PROCESS */
-    #process { padding: 120px 0; background: var(--surface-low); }
+    #process { padding: 120px 0; }
     .process-step { display: flex; gap: 3rem; padding: 3rem 0; border-bottom: 1px solid var(--border); }
     .step-num { font-family: var(--font-display); font-size: 3rem; font-weight: 800; color: var(--accent); opacity: 0.2; width: 80px; }
     .step-content h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .step-content p { color: var(--text-muted); }
 
     /* CTA */
     #contact { padding: 120px 0; }
     .cta-box { padding: 100px 40px; border-radius: 40px; text-align: center; border: 1px solid rgba(255,46,77,0.2); }
+    .cta-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; }
 
     /* FOOTER */
     footer { padding: 50px 0; border-top: 1px solid var(--border); }
@@ -239,68 +247,27 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
     .footer-links a:hover { color: var(--text-main); }
 
-    /* ── REFONTE COMPLÈTE DE LA VERSION MOBILE VIA MEDIA QUERY ── */
+    /* MOBILE RESPONSIVE WITH TOP FIX */
     @media (max-width: 900px) {
       .nav-links { display: none; }
-      .hero { min-height: 85vh; padding: 80px 1rem 40px 1rem; }
-      .hero h1 { font-size: 2.3rem; line-height: 1.2; }
-      .hero p { font-size: 0.95rem; margin-bottom: 2rem; }
-      .hero-btns { flex-direction: column; width: 100%; gap: 10px; }
-      .btn { width: 100%; justify-content: center; padding: 16px; }
-      
-      .ticker-content { gap: 1.5rem; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
-      .ticker-item { font-size: 0.7rem; }
-
-      /* Le portfolio passe en mode liste : tout s'affiche verticalement, proprement */
-      #work { padding: 60px 0; }
-      .portfolio-grid { display: flex; flex-direction: column; gap: 32px; }
-      
-      .p-item { 
-        display: flex;
-        flex-direction: column;
-        background: transparent;
-        border: none;
-        height: auto !important; /* Libère la hauteur forcée desktop */
+      .hero { 
+        min-height: calc(100vh - var(--nav-height)); 
+        padding: 4rem 1rem 2rem 1rem; 
+        justify-content: flex-start; 
       }
-      .p-item:hover { transform: none; }
-
-      /* Le conteneur du média garde un format d'image propre */
-      .p-media-wrapper {
-        position: relative;
-        width: 100%;
-        height: 250px; /* Hauteur harmonieuse sur mobile */
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid var(--border);
-      }
-      .p-item video, .p-item img { position: absolute; top:0; left:0; width:100%; height:100%; }
-      .p-item.interactive-mesh img { width: 100%; height: 100%; top: 0; left: 0; }
-
-      /* Les textes sortent de l'image et s'affichent en dessous pour une lisibilité parfaite */
-      .p-overlay {
-        position: relative;
-        inset: auto;
-        opacity: 1;
-        background: transparent;
-        padding: 12px 4px 0 4px;
-      }
-      .p-tag { font-size: 0.65rem; margin-bottom: 4px; }
-      .p-title { font-size: 1rem; color: var(--text-main); }
-
-      /* Bento & reste */
-      .bento-grid { display: flex; flex-direction: column; gap: 1rem; }
-      .bento-card, .card-wide { padding: 1.5rem; border-radius: 16px; }
-      .bento-card h3 { font-size: 1.3rem; }
-      
-      .process-step { flex-direction: column; gap: 8px; padding: 1.5rem 0; }
-      .step-num { font-size: 2rem; width: auto; }
-      .step-content h3 { font-size: 1.2rem; }
-      
-      #contact { padding: 60px 0; }
-      .cta-box { padding: 40px 20px; border-radius: 20px; }
-      .cta-box h2 { font-size: 1.8rem; }
-      
-      .footer-inner { flex-direction: column-reverse; text-align: center; gap: 1rem; }
+      .hero h1 { font-size: 2.3rem; margin-top: 1rem; }
+      .ticker-content { gap: 1.5rem; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; gap: 12px; }
+      .p-item-1, .p-item-2, .p-item-3, .p-item-4, .p-item-5, .p-item-6, .p-item-7, .p-item-8 { grid-column: span 1 !important; height: 240px; }
+      .p-overlay { opacity: 1; padding: 1rem; }
+      .p-title { font-size: 0.9rem; }
+      .p-item.interactive-mesh:hover img { transform: none !important; }
+      .profile-container { grid-template-columns: 1fr; }
+      .profile-main, .profile-stats { grid-column: span 12; padding: 2rem; }
+      .bento-card, .card-wide { grid-column: span 12; padding: 2rem; }
+      .btn { width: 100%; justify-content: center; }
+      .hero-btns { flex-direction: column; width: 100%; }
+      .process-step { flex-direction: column; gap: 1rem; padding: 2rem 0; }
     }
   </style>
 </head>
@@ -311,15 +278,16 @@
       <a href="#" class="logo"><div class="logo-dot"></div>ES<span class="accent-text">VISION</span></a>
       <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#work" data-t="nav_work">Work</a></li>
-          <li><a href="#services" data-t="nav_services">Services</a></li>
-          <li><a href="#process" data-t="nav_process">Process</a></li>
+          <li><a href="#work" data-t="nav_work">Portfolio</a></li>
+          <li><a href="#profile" data-t="nav_profile">Profil</a></li>
+          <li><a href="#services" data-t="nav_services">Expertises</a></li>
+          <li><a href="#process" data-t="nav_process">Méthode</a></li>
         </ul>
         <div class="lang-switcher">
-          <button class="lang-btn active" onclick="switchLang('en')">EN</button>
-          <button class="lang-btn" onclick="switchLang('fr')">FR</button>
+          <button class="lang-btn" onclick="switchLang('en')">EN</button>
+          <button class="lang-btn active" onclick="switchLang('fr')">FR</button>
         </div>
-        <a href="#contact" class="btn btn-primary" style="padding:10px 16px; font-size:0.8rem;" data-t="nav_cta">Get a Quote</a>
+        <a href="#contact" class="btn btn-primary" style="padding:10px 16px; font-size:0.8rem;" data-t="nav_cta">Parler d'un projet</a>
       </div>
     </div>
   </nav>
@@ -327,106 +295,133 @@
   <header class="hero">
     <div class="hero-glow"></div>
     <div class="container">
-      <h1 data-t="hero_title">Make your product<br><span class="accent-text">impossible to ignore.</span></h1>
-      <p data-t="hero_desc">Shoppers buy what looks real. We turn your product into stunning 3D visuals and videos — so people stop scrolling and start buying.</p>
+      <h1 data-t="hero_title">Donnez à vos produits<br><span class="accent-text">l'impact qu'ils méritent.</span></h1>
+      <p data-t="hero_desc">En ligne, l'esthétique dicte la valeur perçue. Je conçois des visuels et animations 3D ultra-réalistes pensés pour capter le regard, retenir l'attention et déclencher l'acte d'achat.</p>
       <div class="hero-btns">
-        <a href="#contact" class="btn btn-primary" data-t="hero_btn_primary">Start a project <i data-lucide="arrow-right" size="16"></i></a>
-        <a href="#work" class="btn btn-secondary" data-t="hero_btn_secondary">See the work</a>
+        <a href="#contact" class="btn btn-primary" data-t="hero_btn_primary">Lancer un projet <i data-lucide="arrow-right" size="16"></i></a>
+        <a href="#work" class="btn btn-secondary" data-t="hero_btn_secondary">Explorer le portfolio</a>
       </div>
     </div>
   </header>
 
   <div class="ticker">
     <div class="ticker-content">
-      <div class="ticker-item"><i data-lucide="box" size="14"></i> <span data-t="tick_1">Product Visualization</span></div>
-      <div class="ticker-item"><i data-lucide="video" size="14"></i> <span data-t="tick_2">Product Animation</span></div>
-      <div class="ticker-item"><i data-lucide="sparkles" size="14"></i> <span data-t="tick_3">AI Video Generation</span></div>
-      <div class="ticker-item"><i data-lucide="trending-up" size="14"></i> <span data-t="tick_4">Ecommerce Brands</span></div>
-      <div class="ticker-item"><i data-lucide="layers" size="14"></i> <span data-t="tick_5">4K Rendering</span></div>
+      <div class="ticker-item"><i data-lucide="box" size="14"></i> <span data-t="tick_1">Modélisation Produit</span></div>
+      <div class="ticker-item"><i data-lucide="video" size="14"></i> <span data-t="tick_2">Animation Publicitaire 3D</span></div>
+      <div class="ticker-item"><i data-lucide="sparkles" size="14"></i> <span data-t="tick_3">Vidéos IA Immersives</span></div>
+      <div class="ticker-item"><i data-lucide="trending-up" size="14"></i> <span data-t="tick_4">DTC & E-Commerce</span></div>
+      <div class="ticker-item"><i data-lucide="layers" size="14"></i> <span data-t="tick_5">Rendus Studio 4K</span></div>
     </div>
   </div>
 
   <section id="work">
     <div class="container">
       <div class="section-head reveal">
-        <h2 data-t="work_title">The visuals that sell.</h2>
-        <p data-t="work_desc">Product renders, animations, and premium 3D simulations — built to perform on ads, landing pages, and social media.</p>
+        <h2 data-t="work_title">Des visuels conçus pour marquer les esprits.</h2>
+        <p data-t="work_desc">Modélisations fines, packshots épurés et animations premium. Des assets optimisés pour vos campagnes publicitaires, sites e-commerce et réseaux sociaux.</p>
       </div>
 
       <div class="portfolio-grid">
         <div class="p-item p-item-1 reveal">
-          <div class="p-media-wrapper">
-            <video src="./assets/cafe.mp4" autoplay muted loop playsinline></video>
-          </div>
+          <video src="./assets/cafe.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
-            <div class="p-tag" data-t="p1_tag">Dynamic Simulation</div>
-            <div class="p-title" data-t="p1_title">Café — Roasted Beans Explosion</div>
+            <div class="p-tag" data-t="p1_tag">Simulation Organique</div>
+            <div class="p-title" data-t="p1_title">Café — Éclatement dynamique de grains torréfiés</div>
           </div>
         </div>
         <div class="p-item p-item-2 reveal">
-          <div class="p-media-wrapper">
-            <video src="./assets/clavier.mp4" autoplay muted loop playsinline></video>
-          </div>
+          <video src="./assets/clavier.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
-            <div class="p-tag" data-t="p2_tag">Exploded View / Tech</div>
-            <div class="p-title" data-t="p2_title">Clavier — Mechanical Keyboard Anatomy</div>
+            <div class="p-tag" data-t="p2_tag">Rendu Technique / Macro</div>
+            <div class="p-title" data-t="p2_title">Clavier — Vue éclatée de l'anatomie mécanique</div>
           </div>
         </div>
         <div class="p-item p-item-3 reveal">
-          <div class="p-media-wrapper">
-            <video src="./assets/too-faced.mp4" autoplay muted loop playsinline></video>
-          </div>
+          <video src="./assets/too-faced.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
-            <div class="p-tag" data-t="p3_tag">Luxury Cosmetics</div>
-            <div class="p-title" data-t="p3_title">Too Faced — Golden Compact Blush</div>
+            <div class="p-tag" data-t="p3_tag">Cosmétique Premium</div>
+            <div class="p-title" data-t="p3_title">Too Faced — Jeu de lumière sur poudrier blush doré</div>
           </div>
         </div>
         <div class="p-item p-item-4 reveal">
-          <div class="p-media-wrapper">
-            <video src="./assets/lancaster.mp4" autoplay muted loop playsinline></video>
-          </div>
+          <video src="./assets/lancaster.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
-            <div class="p-tag" data-t="p4_tag">Skincare Premium</div>
-            <div class="p-title" data-t="p4_title">Lancaster — Golden Lift Sculpting Cream</div>
+            <div class="p-tag" data-t="p4_tag">Soin & Beauté de Luxe</div>
+            <div class="p-title" data-t="p4_title">Lancaster — Crème Sculptante Golden Lift en action</div>
           </div>
         </div>
         <div class="p-item p-item-5 reveal">
-          <div class="p-media-wrapper">
-            <video src="./assets/daktarin.mp4" autoplay muted loop playsinline></video>
-          </div>
+          <video src="./assets/daktarin.mp4" autoplay muted loop playsinline></video>
           <div class="p-overlay">
-            <div class="p-tag" data-t="p5_tag">Medical / Pharma</div>
-            <div class="p-title" data-t="p5_title">Daktarin — Cinematic Product Reveal</div>
+            <div class="p-tag" data-t="p5_tag">Pharma & Médical</div>
+            <div class="p-title" data-t="p5_title">Daktarin — Révélation cinématique et textures fluides</div>
           </div>
         </div>
         
         <div class="p-item p-item-6 interactive-mesh reveal">
-          <div class="p-media-wrapper">
-            <img src="./assets/mne.png" alt="Mné Biotech Render">
-          </div>
+          <img src="./assets/mne.png" alt="Mné Biotech Render">
           <div class="p-overlay">
-            <div class="p-tag" data-t="p6_tag">Biotech & Pharma</div>
-            <div class="p-title" data-t="p6_title">Mné — Premium Smart Capsule</div>
+            <div class="p-tag" data-t="p6_tag">Biotech & Innovation</div>
+            <div class="p-title" data-t="p6_title">Mné — Écrin digital pour capsule intelligente</div>
           </div>
         </div>
         
         <div class="p-item p-item-7 interactive-mesh reveal">
-          <div class="p-media-wrapper">
-            <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
-          </div>
+          <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
-            <div class="p-title" data-t="p7_title">M4 Mac — Minimalist Studio Render</div>
+            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimaliste et éclairage de studio</div>
           </div>
         </div>
         
         <div class="p-item p-item-8 interactive-mesh reveal">
-          <div class="p-media-wrapper">
-            <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
-          </div>
+          <img src="./assets/chambre-kc.png" alt="Chambre KC Gaming Environment">
           <div class="p-overlay">
-            <div class="p-tag" data-t="p8_tag">3D Environment</div>
-            <div class="p-title" data-t="p8_title">Chambre KC — Isometric Set Design</div>
+            <div class="p-tag" data-t="p8_tag">Environnement 3D</div>
+            <div class="p-title" data-t="p8_title">Chambre KC — Conception de décor isométrique gaming</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE SECTION -->
+  <section id="profile" class="reveal">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-t="prof_title">Derrière les images.</h2>
+      </div>
+      <div class="profile-container">
+        <div class="profile-main glass">
+          <div class="profile-meta">
+            <div class="meta-item">
+              <span data-t="prof_meta_name">Créateur</span>
+              <strong>Ersan Süzer</strong>
+            </div>
+            <div class="meta-item">
+              <span data-t="prof_meta_age">Âge</span>
+              <strong>24 ans</strong>
+            </div>
+            <div class="meta-item">
+              <span data-t="prof_meta_focus">Focus</span>
+              <strong class="accent-text">CGI Product Art</strong>
+            </div>
+          </div>
+          <div class="profile-text">
+            <p data-t="prof_p1">Passionné de création numérique et de culture de marque, je combine vision esthétique et compétences techniques pour façonner des univers en trois dimensions.</p>
+            <p data-t="prof_p2">Mon outil de prédilection est Blender, à travers lequel je donne vie à des produits, textures et éclairages réalistes. Mon but est simple : effacer la frontière entre le virtuel et le réel pour offrir aux marques un contenu visuel percutant, adapté aux exigences du marketing moderne.</p>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="stat-card glass" style="border-left: 3px solid var(--accent);">
+            <i data-lucide="cpu" size="28" style="color: var(--accent); margin-bottom: 1rem;"></i>
+            <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;" data-t="prof_card1_title">Expertise Blender</h4>
+            <p style="font-size: 0.95rem; color: var(--text-muted);" data-t="prof_card1_desc">Maîtrise de la modélisation géométrique, du texturage sur-mesure et de la mise en lumière photoréaliste de vos produits.</p>
+          </div>
+          <div class="stat-card glass">
+            <i data-lucide="target" size="28" style="color: var(--text-main); margin-bottom: 1rem;"></i>
+            <h4 style="font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem;" data-t="prof_card2_title">Sens de l'image</h4>
+            <p style="font-size: 0.95rem; color: var(--text-muted);" data-t="prof_card2_desc">Chaque angle, ombre ou mouvement est pensé pour mettre en avant les atouts phares de votre produit et susciter l'intérêt.</p>
           </div>
         </div>
       </div>
@@ -436,18 +431,18 @@
   <section id="services" class="reveal">
     <div class="container">
       <div class="section-head">
-        <h2 data-t="srv_title">Services tailored for scale.</h2>
+        <h2 data-t="srv_title">Des solutions visuelles sur-mesure.</h2>
       </div>
       <div class="bento-grid">
         <div class="bento-card glass">
           <i data-lucide="box" size="24"></i>
-          <h3 data-t="srv1_title">3D Product Renders</h3>
-          <p data-t="srv1_desc">Hyper-realistic images of your product from any angle. Perfect for Amazon, Shopify, and print packaging.</p>
+          <h3 data-t="srv1_title">Rendus Produit 3D</h3>
+          <p data-t="srv1_desc">Des packshots nets et épurés sous toutes les coutures. Parfait pour valoriser vos fiches produits, catalogues et boutiques en ligne.</p>
         </div>
         <div class="bento-card glass card-wide">
           <i data-lucide="video" size="24"></i>
-          <h3 data-t="srv2_title">Commercial Animation</h3>
-          <p data-t="srv2_desc">Exploded views, liquid simulations, and dynamic camera movements that highlight every single feature of your product to hook customers instantly.</p>
+          <h3 data-t="srv2_title">Animations Publicitaires</h3>
+          <p data-t="srv2_desc">Mouvements de caméra fluides, simulations dynamiques et jeux de textures. Des vidéos immersives conçues pour raconter votre produit et retenir l'attention dès les premières secondes.</p>
         </div>
       </div>
     </div>
@@ -456,28 +451,28 @@
   <section id="process" class="reveal">
     <div class="container">
       <div class="section-head">
-        <h2 data-t="prc_title">How we work.</h2>
+        <h2 data-t="prc_title">Le déroulement.</h2>
       </div>
       <div class="process-steps">
         <div class="process-step">
           <div class="step-num">01</div>
           <div class="step-content">
-            <h3 data-t="step1_title">Briefing & Strategy</h3>
-            <p data-t="step1_desc">We analyze your brand guidelines, product benefits, and target audience to design the perfect visual direction.</p>
+            <h3 data-t="step1_title">Direction Créative</h3>
+            <p data-t="step1_desc">Échange autour de vos besoins, de l'univers de votre marque et de vos objectifs pour définir la trame visuelle idéale.</p>
           </div>
         </div>
         <div class="process-step">
           <div class="step-num">02</div>
           <div class="step-content">
-            <h3 data-t="step2_title">3D Modeling & Texturing</h3>
-            <p data-t="step2_desc">We recreate your product digitally down to the micrometer, ensuring textures, lighting, and materials look entirely lifelike.</p>
+            <h3 data-t="step2_title">Modélisation & Rendu</h3>
+            <p data-t="step2_desc">Création et ajustement minutieux du produit dans Blender : travail sur les matériaux, les reliefs et l'éclairage studio.</p>
           </div>
         </div>
         <div class="process-step">
           <div class="step-num">03</div>
           <div class="step-content">
-            <h3 data-t="step3_title">Rendering & Delivery</h3>
-            <p data-t="step3_desc">Your assets are rendered in stunning 4K resolution and delivered ready-to-use for your conversion-focused marketing campaigns.</p>
+            <h3 data-t="step3_title">Livraison Haute Définition</h3>
+            <p data-t="step3_desc">Production finale de vos images et vidéos en haute résolution, prêtes à être intégrées sur vos différents canaux de communication.</p>
           </div>
         </div>
       </div>
@@ -486,18 +481,19 @@
 
   <section id="contact" class="container reveal">
     <div class="cta-box">
-      <h2 data-t="cta_title">Ready to transform your brand?</h2>
-      <p data-t="cta_desc">Let's build high-converting 3D assets that set your products apart from the competition.</p>
-      <a href="mailto:hello@esvision.com" class="btn btn-primary" data-t="cta_btn">Book a Discovery Call <i data-lucide="calendar" size="16"></i></a>
+      <h2 data-t="cta_title">Un projet en tête ?</h2>
+      <p data-t="cta_desc">Travaillons ensemble pour concevoir l'univers visuel qui correspond à votre marque.</p>
+      <a href="mailto:visione615@gmail.com" class="btn btn-primary" data-t="cta_btn">Contacter EsVision <i data-lucide="calendar" size="16"></i></a>
     </div>
   </section>
 
   <footer>
     <div class="container footer-inner">
-      <p style="font-size:0.85rem; color:var(--text-muted);">&copy; 2026 EsVision. All rights reserved.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted);">&copy; 2026 EsVision. Tous droits réservés.</p>
       <div class="footer-links">
-        <a href="#work" data-t="f_link1">Work</a>
-        <a href="#services" data-t="f_link2">Services</a>
+        <a href="#work" data-t="f_link1">Portfolio</a>
+        <a href="#profile" data-t="f_link1_5">Profil</a>
+        <a href="#services" data-t="f_link2">Expertises</a>
         <a href="#contact" data-t="f_link3">Contact</a>
       </div>
     </div>
@@ -516,7 +512,7 @@
     window.addEventListener("scroll", revealSections);
     window.addEventListener("load", revealSections);
 
-    // ── GLISSEMENT 2D DISCRET (UNIQUEMENT SUR DESKTOP) ──
+    // ── GLISSEMENT 2D DISCRET ET PROPRE ──
     if (window.innerWidth > 900) {
       document.querySelectorAll('.interactive-mesh').forEach(item => {
         const img = item.querySelector('img');
@@ -541,37 +537,44 @@
     // ── TRANSLATIONS ENGINE ──
     const translations = {
       en: {
-        nav_work: "Work", nav_services: "Services", nav_process: "Process", nav_cta: "Get a Quote",
-        hero_title: 'Make your product<br><span class="accent-text">impossible to ignore.</span>',
-        hero_desc: "Shoppers buy what looks real. We turn your product into stunning 3D visuals and videos — so people stop scrolling and start buying.",
-        hero_btn_primary: 'Start a project <i data-lucide="arrow-right" size="16"></i>', hero_btn_secondary: "See the work",
-        tick_1: "Product Visualization", tick_2: "Product Animation", tick_3: "AI Video Generation", tick_4: "Ecommerce Brands", tick_5: "4K Rendering",
-        work_title: "The visuals that sell.", work_desc: "Product renders, animations, and premium 3D simulations — built to perform on ads, landing pages, and social media.",
-        p1_tag: "Dynamic Simulation", p1_title: "Café — Roasted Beans Explosion",
-        p2_tag: "Exploded View / Tech", p2_title: "Clavier — Mechanical Keyboard Anatomy",
-        p3_tag: "Luxury Cosmetics", p3_title: "Too Faced — Golden Compact Blush",
-        p4_tag: "Skincare Premium", p4_title: "Lancaster — Golden Lift Sculpting Cream",
-        p5_tag: "Medical / Pharma", p5_title: "Daktarin — Cinematic Product Reveal",
-        p6_tag: "Biotech & Pharma", p6_title: "Mné — Premium Smart Capsule",
-        p7_tag: "Hardware & Tech", p7_title: "M4 Mac — Minimalist Studio Render",
-        p8_tag: "3D Environment", p8_title: "Chambre KC — Isometric Set Design",
-        srv1_title: "3D Product Renders", srv1_desc: "Hyper-realistic images of your product from any angle. Perfect for Amazon, Shopify, and print packaging.",
-        srv2_title: "Commercial Animation", srv2_desc: "Exploded views, liquid simulations, and dynamic camera movements that highlight every single feature of your product to hook customers instantly.",
-        prc_title: "How we work.",
-        step1_title: "Briefing & Strategy", step1_desc: "We analyze your brand guidelines, product benefits, and target audience to design the perfect visual direction.",
-        step2_title: "3D Modeling & Texturing", step2_desc: "We recreate your product digitally down to the micrometer, ensuring textures, lighting, and materials look entirely lifelike.",
-        step3_title: "Rendering & Delivery", step3_desc: "Your assets are rendered in stunning 4K resolution and delivered ready-to-use for your conversion-focused marketing campaigns.",
-        cta_title: "Ready to transform your brand?", cta_desc: "Let's build high-converting 3D assets that set your products apart from the competition.",
-        cta_btn: 'Book a Discovery Call <i data-lucide="calendar" size="16"></i>',
-        f_link1: "Work", f_link2: "Services", f_link3: "Contact"
+        nav_work: "Portfolio", nav_profile: "Profile", nav_services: "Expertise", nav_process: "Method", nav_cta: "Get in touch",
+        hero_title: 'Give your products<br><span class="accent-text">the impact they deserve.</span>',
+        hero_desc: "Online, aesthetics dictate perceived value. I design ultra-realistic 3D assets and animations crafted to catch the eye, hold attention, and drive purchase decisions.",
+        hero_btn_primary: 'Start a Project <i data-lucide="arrow-right" size="16"></i>', hero_btn_secondary: "Explore the portfolio",
+        tick_1: "Product Modeling", tick_2: "3D Commercial Animation", tick_3: "Immersive AI Videos", tick_4: "DTC & E-Commerce", tick_5: "4K Studio Renders",
+        work_title: "Visuals crafted to stay in mind.", work_desc: "Crisp models, refined packshots, and premium animations. Visual assets optimized for your ad campaigns, e-commerce sites, and social media channels.",
+        p1_tag: "Organic Simulation", p1_title: "Café — Dynamic roasted coffee bean explosion",
+        p2_tag: "Technical Render / Macro", p2_title: "Clavier — Exploded view of mechanical hardware components",
+        p3_tag: "Premium Cosmetics", p3_title: "Too Faced — Elegant light play on a golden luxury compact compact",
+        p4_tag: "Luxury Skincare", p4_title: "Lancaster — Golden Lift Sculpting Cream product narrative",
+        p5_tag: "Pharma & Medical", p5_title: "Daktarin — Cinematic fluid simulation and elegant reveal",
+        p6_tag: "Biotech & Innovation", p6_title: "Mné — Digital showcase for smart health tech capsules",
+        p7_tag: "Hardware & Tech", p7_title: "M4 Mac — Minimalist studio desk set-up with precise lighting",
+        p8_tag: "3D Environment", p8_title: "Chambre KC — Gaming isometric set blueprint and creative design",
+        prof_title: "Behind the imagery.",
+        prof_meta_name: "Creator", prof_meta_age: "Age", prof_meta_focus: "Focus",
+        prof_p1: "Driven by digital creation and brand identity, I blend aesthetic vision with technical skills to shape three-dimensional worlds.",
+        prof_p2: "My tool of choice is Blender, where I bring life-like products, rich textures, and accurate lighting to life. My goal is simple: dissolve the line between virtual and reality to provide brands with impactful visual content tailored to modern marketing.",
+        prof_card1_title: "Blender Expertise", prof_card1_desc: "Mastery of geometric modeling, custom texturing, and photorealistic studio lighting setups for your products.",
+        prof_card2_title: "Visual Instinct", prof_card2_desc: "Every angle, shadow, and motion is carefully designed to highlight your product's key features and build engagement.",
+        srv_title: "Tailored visual solutions.",
+        srv1_title: "3D Product Renders", srv1_desc: "Clean and sharp packshots from every angle. Ideal for enhancing your product pages, digital catalogs, and online storefronts.",
+        srv2_title: "Commercial Animations", srv2_desc: "Smooth camera work, fluid simulations, and custom texture details. Immersive videos made to tell your product's story and capture attention from the first second.",
+        prc_title: "The Workflow.",
+        step1_title: "Creative Direction", step1_desc: "Discussing your needs, your brand identity, and your goals to set up the perfect visual roadmap.",
+        step2_title: "Modeling & Rendering", step2_desc: "Carefully crafting and adjusting the product inside Blender: working on materials, realistic surfaces, and studio lighting.",
+        step3_title: "High-Definition Delivery", step3_desc: "Final production of your images and videos in high resolution, ready to deploy across your communication channels.",
+        cta_title: "Have a project in mind?", cta_desc: "Let's work together to design the visual world your brand deserves.",
+        cta_btn: 'Contact EsVision <i data-lucide="calendar" size="16"></i>',
+        f_link1: "Portfolio", f_link1_5: "Profile", f_link2: "Expertise", f_link3: "Contact"
       },
       fr: {
-        nav_work: "Portfolio", nav_services: "Expertises", nav_process: "Méthode", nav_cta: "Discuter d'un projet",
-        hero_title: 'Donnez à votre produit<br><span class="accent-text">le visuel qu’il mérite.</span>',
-        hero_desc: "En ligne, l'œil achète avant l'esprit. Nous concevons des visuels et vidéos 3D ultra-réalistes taillés pour stopper le scroll, capter l'attention et maximiser vos ventes.",
-        hero_btn_primary: 'Lancer un projet <i data-lucide="arrow-right" size="16"></i>', hero_btn_secondary: "Voir nos réalisations",
-        tick_1: "Modélisation Produit", tick_2: "Animation Publicitaire 3D", tick_3: "Vidéos IA Immersives", tick_4: "DTC & Marques E-com", tick_5: "Rendus Studio 4K",
-        work_title: "Des visuels qui font vendre.", work_desc: "Modélisations, packshots et animations 3D premium — optimisés pour vos publicités, landing pages et réseaux sociaux.",
+        nav_work: "Portfolio", nav_profile: "Profil", nav_services: "Expertises", nav_process: "Méthode", nav_cta: "Parler d'un projet",
+        hero_title: 'Donnez à vos produits<br><span class="accent-text">l\'impact qu\'ils méritent.</span>',
+        hero_desc: "En ligne, l'esthétique dicte la valeur perçue. Je conçois des visuels et animations 3D ultra-réalistes pensés pour capter le regard, retenir l'attention et déclencher l'acte d'achat.",
+        hero_btn_primary: 'Lancer un projet <i data-lucide="arrow-right" size="16"></i>', hero_btn_secondary: "Explorer le portfolio",
+        tick_1: "Modélisation Produit", tick_2: "Animation Publicitaire 3D", tick_3: "Vidéos IA Immersives", tick_4: "DTC & E-Commerce", tick_5: "Rendus Studio 4K",
+        work_title: "Des visuels conçus pour marquer les esprits.", work_desc: "Modélisations fines, packshots épurés et animations premium. Des assets optimisés pour vos campagnes publicitaires, sites e-commerce et réseaux sociaux.",
         p1_tag: "Simulation Organique", p1_title: "Café — Éclatement dynamique de grains torréfiés",
         p2_tag: "Rendu Technique / Macro", p2_title: "Clavier — Vue éclatée de l'anatomie mécanique",
         p3_tag: "Cosmétique Premium", p3_title: "Too Faced — Jeu de lumière sur poudrier blush doré",
@@ -580,15 +583,22 @@
         p6_tag: "Biotech & Innovation", p6_title: "Mné — Écrin digital pour capsule intelligente",
         p7_tag: "Hardware & Tech", p7_title: "M4 Mac — Set-up minimaliste et éclairage de studio",
         p8_tag: "Environnement 3D", p8_title: "Chambre KC — Conception de décor isométrique gaming",
-        srv1_title: "Packshots & Rendus 3D", srv1_desc: "Des images produit d'une netteté absolue sous tous les angles. Idéal pour sublimer vos boutiques Shopify, Amazon et vos packagings imprimés.",
-        srv2_title: "Vidéos & Animations Publicitaires", srv2_desc: "Vues éclatées, simulations fluides et mouvements caméra audacieux. Nous mettons en scène les forces de votre produit pour captiver instantanément l'acheteur.",
-        prc_title: "Zéro friction. Un rendu d'élite.",
-        step1_title: "Stratégie & Direction Artistique", step1_desc: "Analyse fine de votre identité de marque, de votre positionnement publicitaire et de votre audience pour poser les bases du storyboard.",
-        step2_title: "Modélisation Haute Précision", step2_desc: "Réplication numérique de vos produits au micromètre près. Nous sculptons les textures, matières et éclairages pour un réalisme saisissant.",
-        step3_title: "Calcul 4K & Livraison Clés en Main", step3_desc: "Vos rendus sont calculés dans la plus haute résolution existante, prêts à être déployés sur vos canaux d'acquisition et de conversion.",
-        cta_title: "Prêt à surclasser la concurrence ?", cta_desc: "Donnez à vos tunnels de vente la puissance visuelle des plus grandes marques mondiales.",
-        cta_btn: 'Réserver un appel découverte <i data-lucide="calendar" size="16"></i>',
-        f_link1: "Portfolio", f_link2: "Expertises", f_link3: "Contact"
+        prof_title: "Derrière les images.",
+        prof_meta_name: "Créateur", prof_meta_age: "Âge", prof_meta_focus: "Focus",
+        prof_p1: "Passionné de création numérique et de culture de marque, je combine vision esthétique et compétences techniques pour façonner des univers en trois dimensions.",
+        prof_p2: "Mon outil de prédilection est Blender, à travers lequel je donne vie à des produits, textures et éclairages réalistes. Mon but est simple : effacer la frontière entre le virtuel et le réel pour offrir aux marques un contenu visuel percutant, adapté aux exigences du marketing moderne.",
+        prof_card1_title: "Expertise Blender", prof_card1_desc: "Maîtrise de la modélisation géométrique, du texturage sur-mesure et de la mise en lumière photoréaliste de vos produits.",
+        prof_card2_title: "Sens de l'image", prof_card2_desc: "Chaque angle, ombre ou mouvement est pensé pour mettre en avant les atouts phares de votre produit et susciter l'intérêt.",
+        srv_title: "Des solutions visuelles sur-mesure.",
+        srv1_title: "Rendus Produit 3D", srv1_desc: "Des packshots nets et épurés sous toutes les coutures. Parfait pour valoriser vos fiches produits, catalogues et boutiques en ligne.",
+        srv2_title: "Animations Publicitaires", srv2_desc: "Mouvements de caméra fluides, simulations dynamiques et jeux de textures. Des vidéos immersives conçues pour raconter votre produit et retenir l'attention dès les premières secondes.",
+        prc_title: "Le déroulement.",
+        step1_title: "Direction Créative", step1_desc: "Échange autour de vos besoins, de l'univers de votre marque et de vos objectifs pour définir la trame visuelle idéale.",
+        step2_title: "Modélisation & Rendu", step2_desc: "Création et ajustement minutieux du produit dans Blender : travail sur les matériaux, les reliefs et l'éclairage studio.",
+        step3_title: "Livraison Haute Définition", step3_desc: "Production finale de vos images et vidéos en haute résolution, prêtes à être intégrées sur vos différents canaux de communication.",
+        cta_title: "Un projet en tête ?", cta_desc: "Travaillons ensemble pour concevoir l'univers visuel qui correspond à votre marque.",
+        cta_btn: 'Contacter EsVision <i data-lucide="calendar" size="16"></i>',
+        f_link1: "Portfolio", f_link1_5: "Profil", f_link2: "Expertises", f_link3: "Contact"
       }
     };
 
