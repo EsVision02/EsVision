@@ -194,7 +194,7 @@
         height: 106%;
         top: -3%;     
         left: -3%;
-        transition: transform(0.2s) cubic-bezier(0.25, 1, 0.5, 1);
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .p-overlay {
@@ -249,18 +249,17 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.3s ease; }
     .footer-links a:hover { color: var(--text-main); }
 
-    /* MOBILE RESPONSIVE FIXES */
+    /* MOBILE RESPONSIVE CLEANUP */
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .hero { 
-        min-height: calc(100vh - var(--nav-height)); 
-        padding: 6rem 1rem 3rem 1rem; 
+        min-height: 100vh; 
+        padding: var(--nav-height) 1rem 3rem 1rem; 
         justify-content: center; 
       }
       .hero h1 { font-size: 2.3rem; }
       .ticker-content { gap: 1.5rem; }
       
-      /* Force clear constraints on portfolio grid to avoid bounce layouts */
       .portfolio-grid { 
         display: flex; 
         flex-direction: column; 
@@ -387,7 +386,7 @@
           <img src="./assets/m4-mac.png" alt="M4 Mac Tech Render">
           <div class="p-overlay">
             <div class="p-tag" data-t="p7_tag">Hardware & Tech</div>
-            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimalist et éclairage de studio</div>
+            <div class="p-title" data-t="p7_title">M4 Mac — Set-up minimaliste et éclairage de studio</div>
           </div>
         </div>
         
@@ -519,7 +518,6 @@
   <script>
     // ── REVEAL SYSTEM ──
     function revealSections() {
-      // S'active uniquement si l'écran est plus large que 900px (Ordinateur)
       if (window.innerWidth > 900) {
         const reveals = document.querySelectorAll(".reveal");
         for (let i = 0; i < reveals.length; i++) {
@@ -531,13 +529,6 @@
     }
     window.addEventListener("scroll", revealSections);
     window.addEventListener("load", revealSections);
-
-    // Force le scroll tout en haut au chargement de la page pour contrer le comportement mobile initial
-    window.onload = function() {
-      setTimeout(function() {
-        window.scrollTo(0, 0);
-      }, 10);
-    };
 
     // ── GLISSEMENT 2D DISCRET ET PROPRE ──
     if (window.innerWidth > 900) {
